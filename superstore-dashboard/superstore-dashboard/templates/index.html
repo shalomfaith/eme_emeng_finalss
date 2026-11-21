@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Superstore sales and profit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="layout">
+    <aside class="filters" aria-label="Filters">
+      <h2>Filters</h2>
+
+      <fieldset>
+        <legend>Years</legend>
+        <div id="yearChecks" class="checks"></div>
+      </fieldset>
+
+      <label for="region">Region</label>
+      <select id="region"></select>
+
+      <label for="category">Category</label>
+      <select id="category"></select>
+
+      <label for="segment">Customer segment</label>
+      <select id="segment"></select>
+
+      <button id="reset" type="button" class="link-btn">Clear all filters</button>
+      <p id="rowCount" class="muted small"></p>
+    </aside>
+
+    <main>
+      <header class="top">
+        <div>
+          <h1>Superstore sales and profit</h1>
+          <p id="summary" class="muted">Loading data…</p>
+        </div>
+        <div class="seg" role="group" aria-label="Measure shown in charts">
+          <button type="button" data-metric="sales" aria-pressed="true">Sales</button>
+          <button type="button" data-metric="profit" aria-pressed="false">Profit</button>
+          <button type="button" data-metric="quantity" aria-pressed="false">Units</button>
+        </div>
+      </header>
+
+      <div id="status" class="status" role="status" aria-live="polite" hidden></div>
+
+      <section class="ribbon" aria-label="Key figures" id="kpis"></section>
+
+      <section class="panel findings">
+        <h2>What stands out</h2>
+        <ul id="insights"></ul>
+      </section>
+
+      <section class="panel">
+        <h2 id="trendTitle">Monthly sales</h2>
+        <p class="muted small">Dashed line is the 3-month average; dotted line is the straight-line trend.</p>
+        <div class="chart tall"><canvas id="trendChart" role="img" aria-label="Monthly trend chart"></canvas></div>
+      </section>
+
+      <div class="two">
+        <section class="panel">
+          <div class="panel-head">
+            <h2 id="breakTitle">Sales by category</h2>
+            <label class="inline" for="dim">Group by</label>
+            <select id="dim">
+              <option value="category">Category</option>
+              <option value="sub_category">Sub-category</option>
+              <option value="region">Region</option>
+              <option value="segment">Segment</option>
+              <option value="ship_mode">Ship mode</option>
+              <option value="state">State (top 10)</option>
+            </select>
+          </div>
+          <div class="chart"><canvas id="breakChart" role="img" aria-label="Breakdown bar chart"></canvas></div>
+        </section>
+
+        <section class="panel">
+          <h2>Profit margin by discount given</h2>
+          <p class="muted small">Margin = profit ÷ sales across all order lines in that discount range.</p>
+          <div class="chart"><canvas id="discountChart" role="img" aria-label="Profit margin by discount band"></canvas></div>
+        </section>
+      </div>
+
+      <div class="two">
+        <section class="panel">
+          <h2>Total profit by sub-category</h2>
+          <div class="chart xtall"><canvas id="subChart" role="img" aria-label="Profit by sub-category"></canvas></div>
+        </section>
+
+        <section class="panel">
+          <h2>Products losing the most money</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Product</th><th class="num">Avg discount</th><th class="num">Sales</th><th class="num">Profit</th></tr></thead>
+              <tbody id="worstBody"></tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+</html>

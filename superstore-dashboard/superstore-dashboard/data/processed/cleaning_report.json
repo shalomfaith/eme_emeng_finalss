@@ -1,0 +1,13 @@
+{
+  "rows_in": 9994,
+  "rows_out": 9994,
+  "encoding_used": "latin-1",
+  "duplicate_rows_removed": 0,
+  "unparseable_dates_removed": 0,
+  "non_numeric_removed": 0,
+  "invalid_values_removed": 0,
+  "ship_before_order_removed": 0,
+  "notes": [
+    "Postal codes restored to 5 digits (leading zeros)."
+  ]
+}
